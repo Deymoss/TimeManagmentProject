@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/main">
+        <file>main.qml</file>
+        <file>mainProjectPage.qml</file>
+        <file>secondProjectPage.qml</file>
+        <file>qtquickcontrols2.conf</file>
+    </qresource>
+    <qresource prefix="/settings">
+        <file>Settings.qml</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qwe</file>
+        <file>plus.png</file>
+        <file>run.png</file>
+        <file>threeDots.png</file>
+        <file>Back.png</file>
+    </qresource>
+</RCC>

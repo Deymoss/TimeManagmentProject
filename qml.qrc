@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Page1Form.qml</file>
+        <file>Page2Form.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>SettingsPage.qml</file>
+    </qresource>
+    <qresource prefix="/settings">
+        <file>themesPage.qml</file>
+    </qresource>
+    <qresource prefix="/settings" lang="QML"/>
+    <qresource prefix="/" lang="qml"/>
+</RCC>
