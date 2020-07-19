@@ -6,16 +6,16 @@ import QtQuick.Controls.Material 2.0
 Page {
 
 
+StackView {
+    id: stackView
+    visible: true
+}
+
 
     Pane {
         id: settingsPane
-        height: showBar.height
+        height: parent.height/15
         width: parent.width
-        Text {
-            text: qsTr("Настройки")
-            color: "white"
-            anchors.centerIn: parent
-        }
         background: Rectangle {
             height: parent.height
             width: parent.width
@@ -25,20 +25,17 @@ Page {
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width/10
                 height: parent.height
-                onClicked: {
-                    stackView.pop()
-                    showBar = true
-                }
+                onClicked: stockView.pop()
                 anchors.left: parent.left
                 background: Rectangle {
                     height: parent.height
                     width: parent.width
-                    color: backButton.pressed ? "#850000" : "#CC0000"
+                    color: "#CC0000"
                     Image {
                         source: "qrc:/Back.png"
                         anchors.centerIn: parent
                         height: parent.height/1.5
-                        width: parent.width/1.5
+                        width: parent.width
 
                     }
                 }
