@@ -8,16 +8,11 @@ ApplicationWindow {
     width: 640
     height: 480
     title: qsTr("Tabs")
+    property bool showBar: true
 
-    SwipeView {
-        id: swipeView
-        anchors.fill: parent
-        currentIndex: tabBar.currentIndex
-
-        Page1Form {
             //верхний тулбар - начало --------------------------------------------------------------------------------
                 header: ToolBar {
-                    visible: true
+                    visible: showBar
                     RowLayout {
                         anchors.fill: parent
                         Label {
@@ -38,9 +33,9 @@ ApplicationWindow {
                                 transformOrigin: Menu.TopRight
                                 Action {
                                     text: "Настройки"
-                                    //onTriggered: settingsPage.visible
                                     onTriggered: {
-                                       stockView.push("qrc:/SettingsPage.qml")
+                                       stackView.push("qrc:/SettingsPage.qml")
+                                       showBar = false
                                     }
                                 }
                                 Action {
@@ -103,28 +98,40 @@ ApplicationWindow {
             //нижний таббар - начало -----------------------------------------------------------------------------------
                 footer: TabBar {
                     id: tabBar
-                    currentIndex: swipeView.currentIndex
-                    TabButton {
-                        text: qsTr("Главная")
-                        background: Rectangle
-                        {
-                            color: "#CC0000"
-                        }
+                    visible: showBar
+                    width: parent.width
+                    background: Rectangle {
+                        anchors.fill: parent
+                        color: "#CC0000"
                     }
                     TabButton {
-                        text: qsTr("Достижения")
-                        background: Rectangle
-                        {
-                            color: "#CC0000"
+                        id: mainPageButton
+//                        visible: showBar
+//                        anchors.left: parent.left
+//                        width: parent.width/2
+//                        height: parent.height
+                         background: Rectangle {
+                             anchors.fill: parent
+                             color: stackView.depth > 1? "#CC0000" : "#850000"
+                          }
+                         onClicked: stackView.depth > 1? stackView.pop() : ""
+                        text: "Главная"
+                    }
+                    TabButton {
+                        id: achievementsPageButton
+                        text: "Достижения"
+                        background: Rectangle {
+                            anchors.fill: parent
+                            color: stackView.depth > 1? "#850000" : "#CC0000"
+                          }
+                        onClicked: {
+                            stackView.depth < 2 ? stackView.push("qrc:/Page2Form.qml") : ""
                         }
                     }
-                }
+
             //нижний таббар - конец -----------------------------------------------------------------------------------
         }
 
-        Page2Form {
-        }
-    }
     Shortcut {
         sequence: "Menu"
         onActivated: optionsMenuAction.trigger()
@@ -134,17 +141,15 @@ ApplicationWindow {
         icon.name: "menu"
         onTriggered: optionsMenu.open()
     }
-    StackView {
-        id: stockView
-        anchors.fill: parent
-        initialItem: swipeView
-
-    }
     SettingsPage {
         id: settings
         visible: true
     }
 
-
+    StackView {
+        id: stackView
+        anchors.fill: parent
+        initialItem: "qrc:/Page1Form.qml"
+}
 
 }
