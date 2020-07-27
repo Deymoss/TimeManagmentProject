@@ -9,6 +9,7 @@ Page {
         text: qsTr("Page 2")
         font.pixelSize: Qt.application.font.pixelSize * 2
         padding: 10
+
     }
 
     Label {

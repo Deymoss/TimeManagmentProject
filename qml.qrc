@@ -5,6 +5,7 @@
         <file>Page2Form.qml</file>
         <file>qtquickcontrols2.conf</file>
         <file>SettingsPage.qml</file>
+        <file>Singleton.qml</file>
     </qresource>
     <qresource prefix="/settings">
         <file>themesPage.qml</file>
