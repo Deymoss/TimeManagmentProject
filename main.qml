@@ -3,20 +3,22 @@ import QtQuick.Controls 2.5
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.0
+import Singleton 1.0
 ApplicationWindow {
     visible: true
     width: 640
     height: 480
     title: qsTr("Tabs")
-    property bool showBar: true
 
             //верхний тулбар - начало --------------------------------------------------------------------------------
                 header: ToolBar {
-                    visible: showBar
+                    id: toolBar
+                    height: Singleton.dp(60)
                     RowLayout {
                         anchors.fill: parent
                         Label {
-                          text: "Главная"
+                          id: toolBarLabel
+                          text: stackView.depth < 1 ? "Главная" : Singleton.topBarText
                           color: "white"
                           elide: Label.ElideRight
                           horizontalAlignment: Qt.AlignHCenter
@@ -26,16 +28,21 @@ ApplicationWindow {
                     }
 
                         ToolButton {
+                            id: toolMenuID
                             action: optionsMenuAction
+                            visible: Singleton.mainObjectsVisibility
+
                             Menu {
                                 id: optionsMenu
                                 x: parent.width - width
                                 transformOrigin: Menu.TopRight
+
                                 Action {
                                     text: "Настройки"
                                     onTriggered: {
                                        stackView.push("qrc:/SettingsPage.qml")
-                                       showBar = false
+                                       Singleton.topBarText = "Настройки"
+                                       Singleton.mainObjectsVisibility = false
                                     }
                                 }
                                 Action {
@@ -43,24 +50,47 @@ ApplicationWindow {
                                     onTriggered: aboutDialog.open()
 
                                 }
-                            }
+                           }
 
 
                           Image {
-                              source: "qrc:/threeDots.png"
+                              source: "qrc:/Icons/threeDots.png"
                               width: 35
                               height: parent.height-10
-                              anchors.verticalCenter: parent.verticalCenter
-                              anchors.right: parent.right
+                              anchors { verticalCenter: parent.verticalCenter; right: parent.right;}
                           }
                           onClicked: optionsMenu.open()
 
-                          palette.button: "#CC0000"
+                          palette.button: Singleton.themeMainColor
                                    }
-                }
+                        }
                     background: Rectangle {
                         anchors.fill: parent
-                        color: "#CC0000"
+                        color: Singleton.themeMainColor
+                    }
+                    Button {
+                        id: backButton
+                        visible: !Singleton.mainObjectsVisibility
+                        anchors { verticalCenter: parent.verticalCenter; left: parent.left; }
+                        width: parent.width/10
+                        height: parent.height
+                        onClicked: {
+                            stackView.pop()
+                            stackView.depth < 2 ? Singleton.mainObjectsVisibility = true : ""  //if bug appeared in future development, take a look to that.
+                        }
+
+                        background: Rectangle {
+                            height: parent.height
+                            width: parent.width
+                            color: backButton.pressed ? Singleton.themeSubColor : Singleton.themeMainColor
+                            Image {
+                                source: "qrc:/Icons/Back.png"
+                                anchors.centerIn: parent
+                                height: Singleton.dp(20)
+                                width: Singleton.dp(10)
+
+                            }
+                        }
                     }
                 }
                 Dialog {
@@ -75,7 +105,7 @@ ApplicationWindow {
 
                     Column {
                         id: aboutColumn
-                        spacing: 20
+                        spacing: Singleton.dp(20)
 
                         Label {
                             width: aboutDialog.availableWidth
@@ -98,23 +128,19 @@ ApplicationWindow {
             //нижний таббар - начало -----------------------------------------------------------------------------------
                 footer: TabBar {
                     id: tabBar
-                    visible: showBar
+                    visible: Singleton.mainObjectsVisibility
                     width: parent.width
                     background: Rectangle {
                         anchors.fill: parent
-                        color: "#CC0000"
+                        color: Singleton.themeMainColor
                     }
                     TabButton {
                         id: mainPageButton
-//                        visible: showBar
-//                        anchors.left: parent.left
-//                        width: parent.width/2
-//                        height: parent.height
                          background: Rectangle {
                              anchors.fill: parent
-                             color: stackView.depth > 1? "#CC0000" : "#850000"
+                             color: stackView.depth > 1 ? Singleton.themeMainColor : Singleton.themeSubColor
                           }
-                         onClicked: stackView.depth > 1? stackView.pop() : ""
+                         onClicked: stackView.depth > 1 ? stackView.pop() : ""
                         text: "Главная"
                     }
                     TabButton {
@@ -122,10 +148,11 @@ ApplicationWindow {
                         text: "Достижения"
                         background: Rectangle {
                             anchors.fill: parent
-                            color: stackView.depth > 1? "#850000" : "#CC0000"
+                            color: stackView.depth > 1 ? Singleton.themeSubColor : Singleton.themeMainColor
                           }
                         onClicked: {
                             stackView.depth < 2 ? stackView.push("qrc:/Page2Form.qml") : ""
+                            Singleton.topBarText = "Достижения"
                         }
                     }
 
@@ -142,14 +169,14 @@ ApplicationWindow {
         onTriggered: optionsMenu.open()
     }
     SettingsPage {
-        id: settings
-        visible: true
+        id: settPage
     }
 
     StackView {
         id: stackView
         anchors.fill: parent
         initialItem: "qrc:/Page1Form.qml"
+
 }
 
 }

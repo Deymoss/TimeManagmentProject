@@ -1,27 +1,26 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Styles 1.4
-
+import QtQuick.Layouts 1.3
+import QtQuick.Controls.Material 2.0
+import Singleton 1.0
 Page {
     width: 390
     height: 720
-
-
     RoundButton {
         id: addButton
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 40
+        anchors.bottomMargin: 70
         anchors.rightMargin: 40
         width: 60
         height: 60
-        visible: true
-        palette.button:"#CC0000"
+        palette.button: Singleton.themeMainColor
         contentItem: Image {
             id: mask
             width: 100
             height: 100
-            source: "qrc:/plus.png"
+            source: "qrc:/Icons/plus.png"
         }
     }
     Item {
@@ -38,10 +37,10 @@ Page {
     ListModel
     {
         id: thingsToDo
-        ListElement { name: "Пробежка"; imageSource: "qrc:/run.png"}
-        ListElement { name: "Саморазвитие"; imageSource: "qrc:/run.png"}
-        ListElement { name: "Чтение"; imageSource: "qrc:/run.png"}
-        ListElement { name: "Игры"; imageSource: "qrc:/run.png"}
+        ListElement { name: "Пробежка"; imageSource: "qrc:/Icons/run.png"}
+        ListElement { name: "Саморазвитие"; imageSource: "qrc:/Icons/run.png"}
+        ListElement { name: "Чтение"; imageSource: "qrc:/Icons/run.png"}
+        ListElement { name: "Игры"; imageSource: "qrc:/Icons/run.png"}
     }
     Component{
         id: todoDelegate
@@ -68,6 +67,7 @@ Page {
                 anchors.left: parent.left
                 anchors.top: parent.top
                 anchors.topMargin: 2
+
                 Image {
                   anchors.fill: parent
                   fillMode: Image.PreserveAspectFit
