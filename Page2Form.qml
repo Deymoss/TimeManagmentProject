@@ -4,11 +4,15 @@ import QtQuick.Controls 2.5
 Page {
     width: 600
     height: 400
-
+    background: Rectangle {
+        anchors.fill: parent
+        color: Singleton.themeBackColor
+    }
     header: Label {
         text: qsTr("Page 2")
         font.pixelSize: Qt.application.font.pixelSize * 2
         padding: 10
+        color: Singleton.themeBackColor
 
     }
 

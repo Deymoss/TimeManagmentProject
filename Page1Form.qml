@@ -7,6 +7,11 @@ import Singleton 1.0
 Page {
     width: 390
     height: 720
+    background: Rectangle {
+        anchors.fill: parent
+        color: Singleton.themeBackColor
+    }
+
     RoundButton {
         id: addButton
         anchors.right: parent.right
@@ -32,6 +37,7 @@ Page {
         anchors.fill: parent
         delegate: todoDelegate
         model: thingsToDo
+
     }
 
     ListModel
@@ -52,6 +58,7 @@ Page {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.top: parent.top
+                color: Singleton.themeBackColor
                 height: 50
                 Text {
                     anchors.left: parent.left
@@ -67,6 +74,7 @@ Page {
                 anchors.left: parent.left
                 anchors.top: parent.top
                 anchors.topMargin: 2
+                color: Singleton.themeBackColor
 
                 Image {
                   anchors.fill: parent

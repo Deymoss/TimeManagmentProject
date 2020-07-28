@@ -5,7 +5,10 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.0
 import Singleton 1.0
 Page {
-
+    background: Rectangle {
+        anchors.fill: parent
+        color: Singleton.themeBackColor
+    }
     ListView {
         id: listView
         focus: true

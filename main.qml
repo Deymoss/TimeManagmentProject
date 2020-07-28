@@ -9,7 +9,10 @@ ApplicationWindow {
     width: 640
     height: 480
     title: qsTr("Tabs")
-
+    background: Rectangle {
+        anchors.fill: parent
+        color: Singleton.themeBackColor
+    }
             //верхний тулбар - начало --------------------------------------------------------------------------------
                 header: ToolBar {
                     id: toolBar
