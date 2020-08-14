@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.0
 import Singleton 1.0
 Page {
+     property string name: "Настройки"
     background: Rectangle {
         anchors.fill: parent
         color: Singleton.themeBackColor

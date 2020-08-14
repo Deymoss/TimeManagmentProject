@@ -7,6 +7,7 @@ import Singleton 1.0
 Page {
     width: 390
     height: 720
+    property string name: "Главная"
     background: Rectangle {
         anchors.fill: parent
         color: Singleton.themeBackColor
@@ -65,6 +66,8 @@ Page {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.leftMargin: 50
                     text: name
+                    color: Singleton.themeTextColor
+
                 }
             }
             Rectangle {

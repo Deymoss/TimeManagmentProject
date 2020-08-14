@@ -9,6 +9,7 @@ ApplicationWindow {
     width: 640
     height: 480
     title: qsTr("Tabs")
+    property string titl: "Главная"
     background: Rectangle {
         anchors.fill: parent
         color: Singleton.themeBackColor
@@ -21,7 +22,7 @@ ApplicationWindow {
                         anchors.fill: parent
                         Label {
                           id: toolBarLabel
-                          text: stackView.depth < 1 ? "Главная" : Singleton.topBarText
+                          text: "Главная"
                           color: "white"
                           elide: Label.ElideRight
                           horizontalAlignment: Qt.AlignHCenter
@@ -39,27 +40,21 @@ ApplicationWindow {
                                 id: optionsMenu
                                 x: parent.width - width
                                 transformOrigin: Menu.TopRight
+
                                 Action {
                                     text: "Настройки"
                                     onTriggered: {
                                        stackView.push("qrc:/SettingsPage.qml")
-                                       Singleton.topBarText = "Настройки"
-                                       Singleton.mainObjectsVisibility = false
+                                       // toolBarLabel.text = stackView.currentItem.titl
+//                                       Singleton.topBarText = Singleton.titl()
+                                        Singleton.mainObjectsVisibility = false
                                     }
-
                                 }
                                 Action {
                                     text: "О программе"
                                     onTriggered: aboutDialog.open()
 
-
                                 }
-                                background: Rectangle {
-                                        implicitWidth: Singleton.dp(200)
-                                        implicitHeight: Singleton.dp(60)
-                                        border.color: Singleton.themeSubColor
-                                        radius: 10
-                                    }
                            }
 
 
@@ -70,7 +65,6 @@ ApplicationWindow {
                               anchors { verticalCenter: parent.verticalCenter; right: parent.right;}
                           }
                           onClicked: optionsMenu.open()
-
                           palette.button: Singleton.themeMainColor
                                    }
                         }
@@ -86,6 +80,7 @@ ApplicationWindow {
                         height: parent.height
                         onClicked: {
                             stackView.pop()
+                            toolBarLabel.text = stackView.currentItem.titl
                             stackView.depth < 2 ? Singleton.mainObjectsVisibility = true : ""  //if bug appeared in future development, take a look to that.
                         }
 
@@ -107,30 +102,15 @@ ApplicationWindow {
                     id: aboutDialog
                     modal: true
                     focus: true
+                    title: "Справка"
                     x: (screen.width - width) / 2
                     y: screen.height / 6
                     width: Math.min(screen.width, screen.height) / 3 * 2
                     contentHeight: aboutColumn.height
-                    background: Rectangle {
-                        height: parent.height
-                        width: parent.width
-                        color: Singleton.themeBackColor
-                    }
 
                     Column {
                         id: aboutColumn
                         spacing: Singleton.dp(20)
-                        Label {
-                            width: aboutDialog.availableWidth
-                            Text {
-                                id:qwe
-                                text:"                     Справка"
-                                font.bold: true
-                                font.pixelSize: 16
-                            }
-                            wrapMode: Label.Wrap
-
-                        }
 
                         Label {
                             width: aboutDialog.availableWidth
@@ -154,19 +134,16 @@ ApplicationWindow {
                 footer: TabBar {
                     id: tabBar
                     visible: Singleton.mainObjectsVisibility
-                    width: parent.width 
+                    width: parent.width
                     background: Rectangle {
-                        height: Singleton.dp(60)
-                        width: parent.width
+                        anchors.fill: parent
                         color: Singleton.themeMainColor
                     }
                     TabButton {
                         id: mainPageButton
                          background: Rectangle {
-                             width: parent.width
-                             height: parent.height
+                             anchors.fill: parent
                              color: stackView.depth > 1 ? Singleton.themeMainColor : Singleton.themeSubColor
-
                           }
                          onClicked: stackView.depth > 1 ? stackView.pop() : ""
                         text: "Главная"
@@ -175,13 +152,11 @@ ApplicationWindow {
                         id: achievementsPageButton
                         text: "Достижения"
                         background: Rectangle {
-                            width: parent.width
-                            height: parent.height
+                            anchors.fill: parent
                             color: stackView.depth > 1 ? Singleton.themeSubColor : Singleton.themeMainColor
                           }
                         onClicked: {
                             stackView.depth < 2 ? stackView.push("qrc:/Page2Form.qml") : ""
-                            Singleton.topBarText = "Достижения"
                         }
                     }
 
@@ -197,18 +172,14 @@ ApplicationWindow {
         icon.name: "menu"
         onTriggered: optionsMenu.open()
     }
-    SettingsPage {
-        id: settPage
-    }
 
     StackView {
         id: stackView
         anchors.fill: parent
         initialItem: "qrc:/Page1Form.qml"
-        onCurrentItemChanged: {
-            Singleton.topBarText = currentItem.name
-        }
 
 }
+
+
 
 }
