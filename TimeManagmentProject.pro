@@ -30,7 +30,3 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES += \
-    settings/MainPage.qml \
-    settings/MainPage.qml \
-    settings/wqeq.qml

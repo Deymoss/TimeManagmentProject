@@ -6,6 +6,7 @@
         <file>qtquickcontrols2.conf</file>
         <file>SettingsPage.qml</file>
         <file>Singleton.qml</file>
+        <file>AddingPage.qml</file>
     </qresource>
     <qresource prefix="/settings">
         <file>themesPage.qml</file>

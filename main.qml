@@ -200,11 +200,17 @@ ApplicationWindow {
     SettingsPage {
         id: settPage
     }
+    Page1Form {
+        id: pg2form
+    }
+    AddingPage {
+        id: addngPg
+    }
 
     StackView {
         id: stackView
         anchors.fill: parent
-        initialItem: "qrc:/Page1Form.qml"
+        initialItem: pg2form
         onCurrentItemChanged: {
             Singleton.topBarText = currentItem.name
         }
