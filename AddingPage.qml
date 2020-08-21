@@ -54,5 +54,65 @@ Page {
         }
         anchors.leftMargin: Singleton.dp(15)
     }
+    Label {
+        id: timeEndLabel
+        anchors.right: parent.right
+        anchors.top: nameField.bottom
+        anchors.left: timeEndField.left
+        text: "До:"
+        anchors.leftMargin: Singleton.dp(20)
+        font.pixelSize: 20
+        anchors.topMargin: Singleton.dp(20)
+    }
+    TextField {
+        id: timeEndField
+        placeholderText: "Время конца..."
+        anchors.top: timeEndLabel.bottom
+        anchors.right: parent.right
+        width: parent.width/2 - 50
+        height: Singleton.dp(50)
+        background: Rectangle {
+            anchors.fill: parent
+            radius: 25
+        }
+        anchors.rightMargin: Singleton.dp(15)
+    }
+    Label {
+        id: commentLabel
+        anchors.left: parent.left
+        anchors.top: timeStartField.bottom
+        text: "Комментарий:"
+        anchors.leftMargin: Singleton.dp(20)
+        font.pixelSize: 20
+        anchors.topMargin: Singleton.dp(20)
+    }
+    TextArea {
+        id: commentArea
+        placeholderText: "Введите комментарий..."
+        anchors.top: commentLabel.bottom
+        anchors.left: parent.left
+        width: parent.width
+        wrapMode: TextArea.Wrap
+        anchors.horizontalCenter: parent.horizontalCenter
+        height: Singleton.dp(200)
+        background: Rectangle {
+            anchors.fill: parent
+            radius: 25
+        }
+        anchors.rightMargin: Singleton.dp(15)
+    }
+    Button {
+        id: okButton
+        anchors { bottom: parent.bottom; right: parent.right; bottomMargin: Singleton.dp(40); rightMargin: Singleton.dp(40)}
+        width: Singleton.dp(120)
+        height: Singleton.dp(50)
+        text: "Создать"
+        font.pixelSize: 20
+        background: Rectangle {
+            anchors.fill: parent
+            color: Singleton.themeBackColor
+
+        }
+    }
 
 }
