@@ -4,7 +4,9 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.0
 import Singleton 1.0
+
 Page {
+
     id:page1
     width: Singleton.dp(390)
     height: Singleton.dp(720)
@@ -18,7 +20,7 @@ Page {
     Item {
         width: parent.width
         height: parent.height
-        anchors.top: parent.topЫ
+        anchors.top: parent.top
     ListView {
         id: mainListView
         anchors.fill: parent
@@ -30,11 +32,9 @@ Page {
     ListModel
     {
         id: thingsToDo
-        ListElement { name: "Пробежка"; imageSource: "qrc:/Icons/run.png"}
-        ListElement { name: "Саморазвитие"; imageSource: "qrc:/Icons/run.png"}
-        ListElement { name: "Чтение"; imageSource: "qrc:/Icons/run.png"}
-        ListElement { name: "Игры"; imageSource: "qrc:/Icons/run.png"}
+
     }
+
     Component{
         id: todoDelegate
         Item{
@@ -51,7 +51,7 @@ Page {
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.leftMargin: 50
-                    text: name
+                    text: nameof
                     color: Singleton.themeTextColor
 
                 }
@@ -90,9 +90,8 @@ Page {
             source: "qrc:/Icons/plus.png"
         }
         onClicked: {
-            stackView.push("qrc:/AddingPage.qml")
             Singleton.mainObjectsVisibility = false
-
+            stackView.push("qrc:/AddingPage.qml")
         }
     }
 

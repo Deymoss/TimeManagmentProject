@@ -197,20 +197,27 @@ ApplicationWindow {
         icon.name: "menu"
         onTriggered: optionsMenu.open()
     }
-    SettingsPage {
-        id: settPage
+    Component {
+        id: mainPg
+        Page1Form {}
     }
-    Page1Form {
-        id: pg2form
+    Component {
+        id: addingPg
+        AddingPage {}
     }
-    AddingPage {
-        id: addngPg
+    Component {
+        id: settingsPg
+        SettingsPage {}
     }
-
+    Component {
+        id: achivementPg
+        SettingsPage {}
+    }
     StackView {
         id: stackView
         anchors.fill: parent
-        initialItem: pg2form
+        initialItem: mainPg
+
         onCurrentItemChanged: {
             Singleton.topBarText = currentItem.name
         }

@@ -6,10 +6,12 @@ import QtQuick.Controls.Material 2.0
 import Singleton 1.0
 Page {
     property string name: "Добавить занятие"
+    property string nameFieldd: ""
     background: Rectangle {
         anchors.fill: parent
         color: Singleton.themeBackColor
     }
+
     Label {
         id: nameLabel
         anchors.left: parent.left
@@ -113,6 +115,11 @@ Page {
             color: Singleton.themeBackColor
 
         }
+        onClicked: {
+            nameFieldd = nameField.text
+            thingsToDo.append({nameof: nameFieldd})
+        }
     }
+
 
 }
