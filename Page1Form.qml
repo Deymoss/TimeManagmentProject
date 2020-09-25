@@ -6,7 +6,6 @@ import QtQuick.Controls.Material 2.0
 import Singleton 1.0
 
 Page {
-
     id:page1
     width: Singleton.dp(390)
     height: Singleton.dp(720)
@@ -18,62 +17,85 @@ Page {
 
 
     Item {
+        id: rofl
         width: parent.width
         height: parent.height
         anchors.top: parent.top
-    ListView {
-        id: mainListView
-        anchors.fill: parent
-        delegate: todoDelegate
-        model: thingsToDo
 
-    }
 
-    ListModel
-    {
-        id: thingsToDo
 
-    }
+        ListView {
+            id: mainListView
+            anchors.fill: parent
+            delegate: todoDelegate
+            model: thingsToDo
 
-    Component{
-        id: todoDelegate
-        Item{
-            id: wrapper
-            width: mainListView.width
-            height: 50
-            Rectangle{
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.top: parent.top
-                color: Singleton.themeBackColor
+        }
+
+        ListModel {
+            id: thingsToDo
+        }
+
+        function addNewItem(obj){
+            thingsToDo.append(obj)
+            stackView.pop()
+            Singleton.mainObjectsVisibility = true
+        }
+
+
+        Component{
+            id: todoDelegate
+            Item{
+                id: wrapper
+                width: mainListView.width
                 height: 50
-                Text {
+                Rectangle{
                     anchors.left: parent.left
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.leftMargin: 50
-                    text: nameof
-                    color: Singleton.themeTextColor
-
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    color: Singleton.themeBackColor
+                    height: 50
+                    Text {
+                        anchors.left: parent.left
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.leftMargin: 50
+                        text: nameof
+                        color: Singleton.themeTextColor
+                    }
                 }
-            }
-            Rectangle {
-                id: image
-                width: 50
-                height: 50
-                anchors.left: parent.left
-                anchors.top: parent.top
-                anchors.topMargin: 2
-                color: Singleton.themeBackColor
+                Rectangle {
+                    id: image
+                    width: 50
+                    height: 50
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    anchors.topMargin: 2
+                    color: Singleton.themeBackColor
 
-                Image {
-                  anchors.fill: parent
-                  fillMode: Image.PreserveAspectFit
-                  source: imageSource
-                 }
-              }
+                    Image {
+                        anchors.fill: parent
+                        fillMode: Image.PreserveAspectFit
+                        source: imageSource
+                    }
+                }
+                Button {
+                    id:submitButton
+                    anchors.right: parent.right
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: Singleton.dp(40)
+                    height: Singleton.dp(40)
+                    Image {
+                        id: okImg
+                        source: "qrc:/Icons/ok.png"
+                        width: Singleton.dp(40)
+                        height: Singleton.dp(40)
+                    }
+                }
             }
         }
     }
+
+
     RoundButton {
         id: addButton
         anchors.bottom: parent.bottom
@@ -91,9 +113,9 @@ Page {
         }
         onClicked: {
             Singleton.mainObjectsVisibility = false
-            stackView.push("qrc:/AddingPage.qml")
+
+            var addingPage = stackView.push("qrc:/AddingPage.qml")
+            addingPage.throwData.connect(rofl.addNewItem)
         }
     }
-
-
 }

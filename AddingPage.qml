@@ -11,6 +11,7 @@ Page {
         anchors.fill: parent
         color: Singleton.themeBackColor
     }
+    signal throwData(var obj)
 
     Label {
         id: nameLabel
@@ -116,10 +117,14 @@ Page {
 
         }
         onClicked: {
-            nameFieldd = nameField.text
-            thingsToDo.append({nameof: nameFieldd})
+            var obj = {
+                "nameof":nameField.text,
+                "timeStart":timeStartField.text,
+                "timeEnd":timeEndField.text,
+                "comment":commentArea.text,
+                "imageSource": "qrc:/Icons/run.png" // иначе ругается в page1form.qml
+            }
+            throwData(obj)
         }
     }
-
-
 }

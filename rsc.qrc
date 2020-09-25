@@ -6,5 +6,7 @@
         <file>Icons/plus.png</file>
         <file>Icons/eat.png</file>
         <file>Icons/Back.png</file>
+        <file>Icons/cancel.png</file>
+        <file>Icons/ok.png</file>
     </qresource>
 </RCC>

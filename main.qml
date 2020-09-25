@@ -4,6 +4,7 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.0
 import Singleton 1.0
+import Qt.labs.settings 1.1
 ApplicationWindow {
     visible: true
     width: 640
@@ -187,7 +188,6 @@ ApplicationWindow {
 
             //нижний таббар - конец -----------------------------------------------------------------------------------
         }
-
     Shortcut {
         sequence: "Menu"
         onActivated: optionsMenuAction.trigger()
@@ -203,7 +203,12 @@ ApplicationWindow {
     }
     Component {
         id: addingPg
-        AddingPage {}
+        AddingPage {
+            onThrowData: {
+            mainPg.thingsToDo.append({nameof: "objFields.nameFielddd"});
+                console.log("qwe")
+            }
+        }
     }
     Component {
         id: settingsPg
