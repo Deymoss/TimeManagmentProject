@@ -31,7 +31,9 @@ Page {
         height: Singleton.dp(50)
         background: Rectangle {
             anchors.fill: parent
-            radius: 25
+            border.color: Singleton.themeMainColor
+            border.width: 1
+            radius: 10
         }
     }
     Label {
@@ -53,7 +55,9 @@ Page {
         height: Singleton.dp(50)
         background: Rectangle {
             anchors.fill: parent
-            radius: 25
+            border.color: Singleton.themeMainColor
+            border.width: 1
+            radius: 10
         }
         anchors.leftMargin: Singleton.dp(15)
     }
@@ -76,7 +80,9 @@ Page {
         height: Singleton.dp(50)
         background: Rectangle {
             anchors.fill: parent
-            radius: 25
+            border.color: Singleton.themeMainColor
+            border.width: 1
+            radius: 10
         }
         anchors.rightMargin: Singleton.dp(15)
     }
@@ -100,7 +106,9 @@ Page {
         height: Singleton.dp(200)
         background: Rectangle {
             anchors.fill: parent
-            radius: 25
+            border.color: Singleton.themeMainColor
+            border.width: 1
+            radius: 10
         }
         anchors.rightMargin: Singleton.dp(15)
     }

@@ -28,6 +28,7 @@ Page {
             id: mainListView
             anchors.fill: parent
             delegate: todoDelegate
+
             model: thingsToDo
 
         }
@@ -81,14 +82,38 @@ Page {
                 Button {
                     id:submitButton
                     anchors.right: parent.right
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.verticalCenter: cancelButton.verticalCenter + 5
                     width: Singleton.dp(40)
                     height: Singleton.dp(40)
-                    Image {
-                        id: okImg
-                        source: "qrc:/Icons/ok.png"
-                        width: Singleton.dp(40)
-                        height: Singleton.dp(40)
+                    anchors.rightMargin: 5
+                    background: Rectangle {
+                        color: Singleton.themeBackColor
+                        Image {
+                            id: okImg
+                            source: "qrc:/Icons/ok.png"
+                            width: Singleton.dp(40)
+                            height: Singleton.dp(40)
+                           
+                        }
+                    }
+
+                    
+                }
+                Button {
+                    id: cancelButton
+                    anchors.right: submitButton.left
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.rightMargin: Singleton.dp(10)
+                    width: Singleton.dp(40)
+                    height: Singleton.dp(40)
+                    background: Rectangle {
+                        color: Singleton.themeBackColor
+                        Image {
+                            id: cnclImg
+                            source: "qrc:/Icons/cancel.png"
+                            width: Singleton.dp(30)
+                            height: Singleton.dp(30)
+                        }
                     }
                 }
             }
