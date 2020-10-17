@@ -10,6 +10,7 @@ Page {
     width: Singleton.dp(390)
     height: Singleton.dp(720)
     property string name: "Главная"
+    property int number: -1
     background: Rectangle {
         anchors.fill: parent
         color: Singleton.themeBackColor
@@ -22,15 +23,11 @@ Page {
         height: parent.height
         anchors.top: parent.top
 
-
-
         ListView {
             id: mainListView
             anchors.fill: parent
             delegate: todoDelegate
-
             model: thingsToDo
-
         }
 
         ListModel {
@@ -86,6 +83,7 @@ Page {
                     width: Singleton.dp(40)
                     height: Singleton.dp(40)
                     anchors.rightMargin: 5
+                    text: number
                     background: Rectangle {
                         color: Singleton.themeBackColor
                         Image {
@@ -93,10 +91,13 @@ Page {
                             source: "qrc:/Icons/ok.png"
                             width: Singleton.dp(40)
                             height: Singleton.dp(40)
-                           
+
                         }
                     }
-
+                    onClicked: {
+                        mainListView.currentIndex = checked//don't working
+                        console.log(mainListView.currentIndex)
+                    }
                     
                 }
                 Button {

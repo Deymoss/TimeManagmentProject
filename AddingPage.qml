@@ -130,6 +130,7 @@ Page {
                 "timeStart":timeStartField.text,
                 "timeEnd":timeEndField.text,
                 "comment":commentArea.text,
+                "index":Page1Form.number++,
                 "imageSource": "qrc:/Icons/run.png" // иначе ругается в page1form.qml
             }
             throwData(obj)
